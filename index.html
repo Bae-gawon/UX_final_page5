@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Global rising temperature</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200; 300;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="wow.min.js"></script>
+<style type="text/css">
+	html{font-family: 'Work Sans', sans-serif; background: black; box-sizing: border-box;}
+	body,img,p,div,ul{margin: 0; position: relative;}
+	main,section{margin: auto;}
+	nav{width: 100%;  position: fixed; z-index: 2}
+	nav ul{list-style-type: none; padding: 30px;}
+	nav li{float: left; padding-left: 25px; padding-right: 25px }
+	img{position: absolute;}
+	main ul{list-style-type: none; padding: 0; position: absolute;}
+	main{height: 1200px;}
+	section{padding-top:100px; height: 1000px;}
+	span{font-weight: 700;}
+	p{text-align: center;}
+	footer .row{display: flex; justify-content: space-between; height: 100px;}
+	a{text-decoration: none;}
+	a:link, a:visited{color: #CC0000;}
+	a li:hover, a li:active{border:0.75px solid #CC0000;}
+
+	.row{margin: auto; width: 1200px; padding-top: 30px;}
+
+	.left{float: left;}
+	.right{float: right;}
+
+	.font1{font-size: 175pt;}
+	.font2-1{font-size: 75pt; letter-spacing: -10pt;}
+	.font2-2{font-size: 50pt; line-height: 100%}
+	.font2-3{font-size: 1.8em; line-height: 150%;}
+	.font2{font-size: 40px;}
+	.font3{font-size: 1.5em; line-height: 150%}
+	.font4{font-size: 1em;}
+
+	.align{text-align: left;}
+	.line{line-height: 170%}
+
+	.ex-light{font-weight: 200}
+	.light{font-weight: 300;}
+	.bold{font-weight: 700;}
+
+	.color{color: #CC0000;}
+
+	main p{position: absolute;}
+	#day{top: 150px; left: 48%;}
+	#tem{top: 200px; left: 40%}
+	#plus{top: 280px; left: 32%;}
+	#C{top: 330px; left: 61%}
+
+	#escape{top: 800px; right: 200px;animation: escape 1s infinite;  animation-direction:alternate;}
+	@keyframes escape{from{top: 800px; right: 200px;} to{top: 750px; right: 200px;}}
+	.escape{position: absolute; width: 100px; top: 750px; right: 200px; height:150px;z-index: 3}
+
+
+	#moon{left:0; top: 0;}
+	#earth{top: 500px; left: 17%; width: 65%; animation: rr 100s infinite linear;}
+	@keyframes rr{ to{ transform:rotate(360deg); } }
+	#graph{top: -100px; left:200px; width: 1300px}
+	#b{width: 100%; top: 900px;}
+	#y{top:180px; left:50px; width: 3.5%}
+
+	.weather{padding: 0; height: 1200px;}
+	.w-box{width: 1200px; top: 50px;}
+	.e-box{width: 1200px; top: 580px;}
+
+	.clear{width:250px; top: 220px; left: 490px;  animation: clear 1s infinite;  animation-direction:alternate;}
+	@keyframes clear{0%{opacity: 0%} 100%{opacity: 100%}}
+	.point{width: 500px; animation: pmove 1s infinite;  animation-direction:alternate;}
+	@keyframes pmove{from{top: 135px; left: 350px;} to{top: 135px; left: 400px;}}
+
+	.point2{width: 500px; animation: pmovee 1s infinite;  animation-direction:alternate; transform: rotate(180deg);}
+	@keyframes pmovee{from{top: 135px; left: 350px;} to{top: 135px; left: 300px;}}
+
+	.state{top: 350px; left: 1000px; width: 100px;}
+
+	.hidden{display: none; visibility: hidden;}
+	.button {cursor:pointer;}
+	.button:hover{opacity: 50%;}	
+	.box_modal{visibility: collapse;  position: fixed; display: block; width: 500px; height: 400px; top:50%; left: 50%; margin-top: -75px; margin-left: -150px; background: black; border: 0.75px solid #CC0000; overflow: hidden;
+  filter: alpha(opacity=60);
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  -webkit-transform: scale(0, 0);
+  -ms-transform: scale(0, 0);
+  transform: scale(0, 0);
+z-index: 3}
+  
+  	.closer{cursor:pointer; position: absolute; width:30px; height:30px; top: 0; right:0; background: #CC0000; text-align: center; color: white; z-index: 4}
+
+  	.text{display: inline-block; padding: 50px;}
+
+  	input#modal[type=checkbox]:checked ~ .box_modal {
+  visibility: visible;
+  -webkit-transform: scale(1, 1);
+  -ms-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+
+	.air{width: 150px; top:710px; left: 110px; animation: air 1s;}
+	@keyframes air{0%{opacity: 0%} 100%{opacity: 100%}}
+	.water{width: 80px; top: 700px; left: 560px; animation: water 1.5s;}
+	@keyframes water{0%{opacity: 0%} 100%{opacity: 100%}}
+	.energy{width: 80px; top: 700px; left: 980px; animation: energy 2s;}
+	@keyframes energy{0%{opacity: 0%} 100%{opacity: 100%}}
+	
+	#clear{top:100px;}
+
+	.w-text{display: flex;}
+	#a{width: 400px;top:560px; left:-10px;}
+	#w{width: 400px;top:560px; left:5px;}
+	#e{width: 400px;top:560px; left:25px;}
+	
+	.w-content{display: flex;}
+	#a-1{width: 400px;top:720px; left:-10px;}
+	#w-1{width: 400px;top:720px; left:5px;}
+	#e-1{width: 400px;top:720px; left:25px;}
+
+	.news{background-image: url('bg.png'); background-repeat: no-repeat; background-size: cover; height: 1100px; }
+	.box{display: flex; width: 1200px;}
+	.border{border: 0.75px solid #CC0000; background:black}
+	.news1{width: 300px; height: 800px; margin: 20px; animation: news 1s;}
+	@keyframes news{from{left: -350px;} to{left: 0px;}}
+	#news1{top: 25px; left: 25px;}
+	#news1_text{top: 620px; left: 25px;max-width: 230px;} 
+
+	.news2{width: 560px; height: 800px; margin: 20px; animation: newss 1s;}
+	@keyframes newss{from{margin-top: 350px;} to{margin-top: 20px;}} 
+	#news2{width: 470px; top: 330px; left: 25px;}
+	#news2_text{left: 25px; max-width: 470px;} 
+
+	.news34{width: 300px; height: 800px; margin: 20px}
+	.news3{width: 100%; height:375px; margin-bottom:50px;  animation: newsss 1s;}
+	@keyframes newsss{from{right : -350px;} to{right: 0px;}}
+	#news3{width: 225px; top: 25px; left: 25px} 
+	.news4{width: 100%; height: 375px;margin-top:50px;  animation: newssss 1.25s;}
+	@keyframes newssss{from{right : -350px;} to{right: 0px;}}
+	#news4_text{top: 25px; left: 25px; max-width: 230px;} 
+
+	.diary1{width: 400px; height: 770px; margin: 20px; z-index: -2}
+	.diary23{width: 740px; height: 770px; margin: 20px; z-index: -2}
+	.diary2{width: 740px; height: 90px; margin-bottom: 40px;} 
+	#diary2_text{top: 25px; left: 50px} 
+	.diary3{width: 740px; height: 640px; margin-top: 40px;} 
+	#diary3_text{top: 50px;left: 50px; max-width: 640px;}
+	#sticker1{width: 200px; top:0px; animation: sticker 1s infinite;  animation-direction:alternate;} 
+	#sticker2{width: 200px; top:740px; left: 1000px;}
+	@keyframes sticker{0%{transform: rotate(20deg)} 100%{transform: rotate(-20deg)}}
+
+
+	#person{top:25px; left: 25px;}
+	#name{top:700px; left:25px;}
+
+	.What{animation: highlight 2.5s infinite; animation-direction:alternate;}
+	@keyframes highlight{0%{border-bottom: 0 solid black;} 100%{border-bottom: 0.75px solid #CC0000}}
+
+	#life1{width: 900px; left: -100px;}
+	#life2{top: 300px; left: 300px;}
+	#life3{top:150px; right:-100px;}
+	#life4{width: 450px; top:700px; left: -50px;}
+	#life5{width: 300px; top:700px; left: 450px;}
+	#life6{width: 500px; top:650px; right: -80px;}
+	#emotion{top:1350px; left: 560px;}
+	#beautiful{top: 1200px;}
+
+	#sky{width: 100%; bottom: 100px;}
+	#city{width:100%; bottom: 100px;}
+
+	.life{padding-top:500px; height: 1000px;}
+
+
+
+</style>
+</head>
+
+<body>
+<nav>
+	<ul class="left font3 light color">
+		<li>Global rising temperature is</li>
+	</ul>
+	<ul class="right font3 light color">
+	<a href="index.html"><li>+0</li></a>
+	<a href=""><li>+0.13</li> </a>
+	<a href=""><li>+1</li> </a>
+	<a href=""><li>+2.9</li></a>
+	<a href=""><li>+6.4</li></a>
+	</ul>
+</nav>
+
+<main>
+	<img src="escape.png" id="escape">
+	<a href="index.html"><div class="escape"></div></a>
+	<img src="moon.png" id="moon">
+	<img src="earth.png" id="earth">
+	<img src="graph.png" id="graph">
+	<img src="b.png" id="b">
+	<img src="y.png" id="y">
+	<p class="font3 light color" id="day">Today</p>
+	<p class="font2-1 ex-light color" id="plus">+</p>
+	<p class="font1 ex-light color" id="tem">6.4</p>
+	<p class="font2-1 ex-light color" id="C">˚C</p>
+</main>
+
+<section class="weather">
+		<p class="font2-2 color light">Today's <span>Earth</span></p>
+	<div class="row"> 
+		<img src="w-box.png" class="w-box">
+		<img src="e-box.png" class="e-box">
+		
+
+		<label for="modal" class="button">
+			<p class="font2-3 bold color" id="clear">Hot</p><img src="clear.png" class="clear">
+		</label>
+
+
+		<input type="checkbox" id="modal" class="hidden">
+		<div class="box_modal"><label for="modal" class="closer font3 light">X</label>
+			<div class="font3 light color text"></div>
+		</div>
+
+
+		<img src="air.png" class="air wow">
+		<img src="water.png" class="water wow">
+		<img src="energy.png" class="energy wow">
+		<img src="point.png" class="point">
+		<img src="point.png" class="point2">
+		<img src="state.png" class="state">
+			<div class="w-text">
+				<p class="font2-3 bold color" id="a">Air</p>
+				<p class="font2-3 bold color" id="w">Sea level</p>
+				<p class="font2-3 bold color" id="e">Energy</p>
+			</div>
+			<div class="w-content">
+				<p class="font3 light color" id="a-1">Pollution</p>
+				<p class="font3 light color" id="w-1">Too high</p>
+				<p class="font3 light color" id="e-1">Depletion</p>
+	</div>
+</section>
+
+<section class="news">
+		<p class="font2-2 color light"><span>Our</span> News</p>
+	<div class="row">
+		<div class="box">
+		<div class="news1 border wow"><img src="1.png" id="news1">
+			<div id="news1_text">
+				<p class="font2-3 bold color align">Desolate land</p><br><p class="font3 light color align">A desolate land with no grass</p>
+			</div>
+		</div>
+			<div class="news2 border wow"><img src="2.png" id="news2">
+			<div id="news2_text">
+				<br><p class="font2 bold color align">SUBMERGED ISLANDS</p><br><p class="font3 light color align">Due to global warming, sea levels have risen and the island has completely disappeared. The island disappeared into the water without a trace.</p>
+			</div>
+		</div>
+			<div class="news34">
+			<div class="news3 border wow"><img src="3.png" id="news3"></div>
+		
+
+			<div class="news4 border wow" id="news4">
+				<div id="news4_text">
+				<p class="font2-3 bold color align">Polluted air quality </p><br><p class="font3 light color align">The concentration of carbon dioxide in the air is high and the degree of pollution is high.</p>
+				</div>
+			</div>
+		</div>
+		</div>
+			
+
+	</div>
+</section>
+
+<section>
+	<p class="font2-2 color light"><span>Ava</span>'s Diary</p>
+	<div class="row">
+		<div class="box">
+		<div class="diary1 border">
+			<img src="human.png" id="person"><p class="font2-3 bold color align" id="name">Ava Kelly &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (9)</p>
+		</div>
+		<div class="diary23">
+		<div class="diary2 border">
+			<p class="font2-3 light color align" id="diary2_text">2100 / 10 / 23 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>Where is my life?</span></p>
+		</div>
+		
+		<div class="diary3 border">
+			<div id="diary3_text">
+				<p class="font3 light color align line">The water is too expensive to drink. The sunlight was so hot I couldn't go outside. I have a hard time breathing, so I have an oxygen tank at home. And tomorrow, there is a record heavy rain. Everyone might be ride a boat. Winter will soon come, but then it can be too cold to freeze and die. People are disappearing one by one. <br><br><span class="What wow">Will I have the future?</span></p>
+				</div>
+			</div>
+			</div>
+		</div>
+	<img src="sticker1.png" id="sticker1" class="drag" style="top:100px;left:100px;">
+	<img src="sticker2.png" id="sticker2" >
+	</div>
+	
+</section>
+
+<section>
+	<div class="row">
+	<img src="life3.png" id="life3">
+	<img src="life4.png" id="life4">
+	<img src="life5.png" id="life5">
+	<img src="life6.png" id="life6">
+	<img src="life1.png" id="life1">
+	<img src="life2.png" id="life2">
+	<p class="font2 color light" id="beautiful">Will I have the future?</p>
+	<img src="emotion.png" id="emotion">
+	</div>
+</section>
+
+<section class="life">
+	<img src="sky.png" id="sky">
+	<img src="city.png" id="city">
+</section>
+
+<footer>
+<div class="row">
+	<p class="left font4 light color footer">Global temperature</p>
+	<p class="left font4 light color footer">Global warming</p>
+	<p class="left font4 light color footer">Human & Environment</p>
+	<p class="left font4 light color footer">There is no planet B</p>
+</footer>
+
+	<script type="text/javascript">
+		//드래그앤 드롭 코드 시작	
+	(function(){
+	var d = false;
+	var target,cx,cy,lx,ly;
+	var t = document.getElementsByClassName("drag");
+	for(var i=0; i<t.length; i++){
+	t[i].style.display = "block";
+	t[i].style.position = "absolute";
+	t[i].style.cursor = "pointer";
+	t[i].ondragstart = function(e){e.preventDefault();};
+	t[i].onmousedown = function(e){ d = true; target = e.target; cx = e.clientX; cy = e.clientY; lx=parseInt(e.target.style.left); ly=parseInt(e.target.style.top);console.log(lx,ly);}
+	t[i].onmouseup = function(){ d = false;}
+	window.onmousemove = function(e){
+	if(d){ target.style.left = (lx + e.clientX - cx) + "px"; target.style.top = (ly + e.clientY - cy) + "px";}
+	}
+	}
+	})();
+	//드래그앤 드롭 코드 끝
+
+		new WOW().init();
+	</script>
+
+</body>
+</html>
